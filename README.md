@@ -1,5 +1,7 @@
 # AI Data Miner
 
+🚧This Project i under construction
+
 This project is a simple FastAPI application that demonstrates the use of Google's Gemini API to generate content. It's designed to be a starting point for building AI-powered data mining or content generation services.
 
 ## Features
