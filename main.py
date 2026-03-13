@@ -1,24 +1,17 @@
-import os
-
-from dotenv import load_dotenv
+import lmstudio as lms
 from fastapi import FastAPI
-from google import genai
-
-load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 app = FastAPI()
-client = genai.Client(api_key=GEMINI_API_KEY)
 
-response = client.models.generate_content(
-    model="gemini-3-flash-preview",
-    contents="Please explain what is data mining",
-)
+model = lms.llm("qwen/qwen3.5-9b")
+result = model.respond("Hai")
+
 
 @app.get("/")
-async def read_root():
-    return {"message": "Welcome to the AI Data Miner"}
+async def root():
+    return {"message": "Welcome to my sassy AI"}
+
 
 @app.get("/analyze")
 async def analyze():
-    return {"message": response.text}
+    return {"message": result}
