@@ -3,15 +3,29 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-model = lms.llm("qwen/qwen3.5-9b")
-result = model.respond("Hai")
+prompt = """
+IMPORTANT: Provide response text only.
+Do not include any explanations or additional text,
+Do NOT use Markdown, do NOT use asterisks (**),
+do NOT use hashtags (#), and do NOT use bullet points.
+Explain how data mining works integration with LLM based models"""
+
+model = lms.llm("qwen/qwen3-1.7b")
+result = model.respond(prompt)
+
+
+async def clean_text(text: str):
+    return text.replace("**", "").replace("#", "").replace("*", "")
+
+
+clean_text_result = clean_text(result.text)
 
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to my sassy AI"}
+    return {"message": "Welcome to my LLM based data mining AI"}
 
 
 @app.get("/analyze")
 async def analyze():
-    return {"message": result}
+    return {"message": clean_text_result}
