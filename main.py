@@ -14,12 +14,12 @@ model = lms.llm("qwen/qwen3-1.7b")
 result = model.respond(prompt)
 
 
-async def clean_text(text: str):
+async def clean_text(text):
     return text.replace("**", "").replace("#", "").replace("*", "")
 
 
 # ERROR when result return a parameter and does not found the attribute
-clean_text_result = clean_text(result.text)
+clean_text_result = clean_text(result)
 
 
 @app.get("/")
