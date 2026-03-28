@@ -14,7 +14,7 @@ model = lms.llm("qwen/qwen3-1.7b")
 result = model.respond(prompt)
 
 
-async def clean_text(text):
+def clean_text(text):
     return text.replace("**", "").replace("#", "").replace("*", "")
 
 
@@ -23,10 +23,10 @@ clean_text_result = clean_text(result)
 
 
 @app.get("/")
-async def root():
+def root():
     return {"message": "Welcome to my LLM based data mining AI"}
 
 
 @app.get("/analyze")
-async def analyze():
+def analyze():
     return {"message": clean_text_result}
