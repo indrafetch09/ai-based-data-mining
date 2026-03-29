@@ -6,7 +6,9 @@ app = FastAPI()
 model = lms.llm("qwen/qwen3-1.7b")
 
 
-# print(result)
+result = model.respond(f"""
+    ${SYSTEM} Explain how data mining works effectively with LLM integration in bahasa
+       """)
 
 
 @app.get("/")
