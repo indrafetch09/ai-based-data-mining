@@ -1,19 +1,16 @@
 import lmstudio as lms
 from fastapi import FastAPI
 
+from app.core import system_prompt
+
 app = FastAPI()
 
 model = lms.llm("qwen/qwen3-1.7b")
 
-system = """ IMPORTANT: Provide response text only.
-       Do not include any explanations or additional text,
-       Do NOT use Markdown, do NOT use asterisks (**),
-       do NOT use hashtags (#), and do NOT use bullet points.
-"""
-
 result = model.respond(f"""
-    ${system} Explain how data mining works effectively with LLM integration in bahasa
-       """)
+    ${system_prompt} Explain how data mining works effectively with LLM integration in bahasa
+
+""")
 
 
 @app.get("/")
