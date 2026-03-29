@@ -5,9 +5,14 @@ app = FastAPI()
 
 model = lms.llm("qwen/qwen3-1.7b")
 
+system = """ IMPORTANT: Provide response text only.
+       Do not include any explanations or additional text,
+       Do NOT use Markdown, do NOT use asterisks (**),
+       do NOT use hashtags (#), and do NOT use bullet points.
+"""
 
 result = model.respond(f"""
-    ${SYSTEM} Explain how data mining works effectively with LLM integration in bahasa
+    ${system} Explain how data mining works effectively with LLM integration in bahasa
        """)
 
 
@@ -18,13 +23,5 @@ def root():
 
 @app.get("/analyze")
 def analyze():
-    result = model.respond(
-        """
-       IMPORTANT: Provide response text only.
-       Do not include any explanations or additional text,
-       Do NOT use Markdown, do NOT use asterisks (**),
-       do NOT use hashtags (#), and do NOT use bullet points.
-       Explain how data mining works integration with LLM based models
-       """
-    )
-    return {"message": result}
+
+    return {"message": result.content}
