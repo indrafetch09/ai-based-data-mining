@@ -16,7 +16,7 @@ result = model.respond(f"""
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to my LLM based data mining AI"}
+    return {"message": "Welcome to Loco Data Miner"}
 
 
 @app.get("/analyze")
